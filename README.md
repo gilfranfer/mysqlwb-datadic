@@ -2,7 +2,7 @@
 Python Script to Generate a Data Dictionary in HTML from a Database Model on MSQL Workbench 8.0
 The HTML from the original Script version has been improved with Bootstrap.
 
-Original Author: [Tito Sanchez](https://github.com/tmsanchez/workbenchscripts/blob/master/README.md
+Original Author: [Tito Sanchez](https://github.com/tmsanchez/workbenchscripts/blob/master/README.md)
 
 Updates by: Fernando Gil
 
