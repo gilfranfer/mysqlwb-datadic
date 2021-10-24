@@ -13,4 +13,4 @@ Updates by: Fernando Gil
 - Download the "DatabaseReportHTML.py" file
 - Go to "Scripting" Menu on MySQL Workbench, and select "Install Plugin/Module" option
 - Find and select the file downloaded on step 1. Then restart MySQL Workbench
-- You can trigger the report from "Tools/Catalog" Menu, option "HTML Database Schema Report"
+- You can trigger the report from "Tools/Catalog" Menu, option "DB Report in HTML"
