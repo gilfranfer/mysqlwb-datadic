@@ -1,13 +1,12 @@
 # MySQL Workbench (8.0) Python Plugin/Module
 # Script to Generate an HTML Schema Report from Mysql Model
-# Original Author: Tito Sanchez
-# Updates by: Fernando Gil
-
+# Authors: Tito Sanchez, and Fernando Gil
+# ---------------------------------------------------------
 # To install this Plugin on MySQL Workbench version 8.0:
-# 1. Download this file with a Python extension (.py)
+# 1. Download this file wuth a Python extension (.py)
 # 2. Go to "Scripting" Menu on MySQL Workbench, and select "Install Plugin/Module" option
 # 3. Find and select the file downloaded on step 1. Then restart MySQL Workbench
-# 5. You can trigger the report from "Tools/Catalog" Menu, option "DB Report in HTML"
+# 5. You can trigger the report from "Tools/Catalog" Menu, option "HTML Database Schema Report"
 
 from wb import *
 import grt
@@ -16,11 +15,10 @@ import mforms
 
 ModuleInfo = DefineModule(
     name="DBReportHTML",
-    author="Tito Sanchez",
-    version="1.0",
+    author="Tito Sanchez and Fernando Gil",
+    version="2.0",
     description="Database Schema Report in HTML format (with Bootstrap)",
 )
-
 
 @ModuleInfo.plugin(
     "tmsanchezplugin.dbReportHtml",
@@ -29,24 +27,24 @@ ModuleInfo = DefineModule(
     input=[wbinputs.currentCatalog()],
     pluginMenu="Catalog",
 )
+
 @ModuleInfo.export(grt.INT, grt.classes.db_Catalog)
 def htmlDataDictionary(catalog):
-    # Put plugin contents here
-    htmlOut = ""
+    #Ask User for the path where the HTML file will be stored
+    filePath = ""
     filechooser = FileChooser(mforms.SaveFile)
     filechooser.set_extensions("HTML File (*.html)|*.html", "html")
     if filechooser.run_modal():
-        htmlOut = filechooser.get_path()
-    print("HTML File: %s" % (htmlOut))
-    if len(htmlOut) <= 1:
+        filePath = filechooser.get_path()
+    if len(filePath) <= 1:
         return 1
-    
+    print("HTML File path: %s" % (filePath))
+
+    # Schema details
     schema = catalog.schemata[0]
-    
+
     # Start HTML
-    htmlFile = open(htmlOut, "w")
-    htmlFile.write("<html><head>")
-    htmlFile.write("<title>Schema Report for database: %s</title> \n" % (schema.name))
+    htmlFile = open(filePath, "w")
     htmlFile.write(
         """
         <!doctype html><html lang="en">
@@ -72,6 +70,7 @@ def htmlDataDictionary(catalog):
              </div>
             </nav>
         </header>
+        <div class="container">
         """
         % (schema.name)
     )
@@ -79,9 +78,10 @@ def htmlDataDictionary(catalog):
     #Schema Comments
     htmlFile.write(
         """
-        <div class="container">
-        <div class="my-5">
-            %s
+        <div class="card my-5">
+           <div class="card-body">
+              %s
+           </div>
         </div>
         """
         % (schema.comment)
@@ -157,7 +157,7 @@ def htmlDataDictionary(catalog):
     htmlFile.close()
     Utilities.show_message(
         "Report generated",
-        "HTML Report format from current model generated in %s" % htmlOut,
+        "HTML Report format from current model generated in %s" % filePath,
         "OK",
         "",
         "",
