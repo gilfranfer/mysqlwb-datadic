@@ -10,7 +10,7 @@ Updates by: Fernando Gil
 
 
 # To install this Plugin on MySQL Workbench version 8.0
-- Download this file wuth a Python extension (.py)
+- Download the "DatabaseReportHTML.py" file
 - Go to "Scripting" Menu on MySQL Workbench, and select "Install Plugin/Module" option
 - Find and select the file downloaded on step 1. Then restart MySQL Workbench
 - You can trigger the report from "Tools/Catalog" Menu, option "HTML Database Schema Report"
