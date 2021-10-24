@@ -76,10 +76,20 @@ def htmlDataDictionary(catalog):
         % (schema.name)
     )
 
-     # List of Tables
+    #Schema Comments
     htmlFile.write(
         """
         <div class="container">
+        <div class="my-5">
+            %s
+        </div>
+        """
+        % (schema.comment)
+    )
+
+     # List of Tables
+    htmlFile.write(
+        """
           <div class="my-5">
             <span id="home" class="fs-1 text-decoration-none">Table List </span>
             <ul class="list-group">
@@ -105,6 +115,7 @@ def htmlDataDictionary(catalog):
 
         htmlFile.write(
             """
+        <p class="fw-bold mt-3">Table Columns</p>
         <table class="table table-bordered table-striped">
         <tr>
         <th>Name</th>
